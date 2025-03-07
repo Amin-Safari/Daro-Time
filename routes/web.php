@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\SingUpController;
+use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\SignInController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,4 +14,10 @@ Route::get('/abuot', function () {
 Route::get('/dashboard', function () {
     return view('welcome');
 });
-route::resource('/singup', SingUpController::class);
+Route::get('/signup', [SignUpController::class , 'index'])->name('signup.index');
+
+Route::post('/sinagup', [SignUpController::class , 'signup'])->name('signup');
+
+Route::get('/signin', [SignInController::class , 'index'])->name('signin.index');
+
+Route::post('/sinagin', [SignInController::class , 'signin'])->name('signin');

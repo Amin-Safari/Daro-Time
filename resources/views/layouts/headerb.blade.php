@@ -1,3 +1,5 @@
 <header>
-    <button type="button" class="btn-close" ></button>
+    <a href="/" type="button" class="btn-close m-4"></a>
 </header>
+
+

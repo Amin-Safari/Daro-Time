@@ -12,20 +12,20 @@
 <style>
     body[data-bs-theme="dark"] {
         background-color: rgb(33, 37, 41);
-        /* Dark background */
+        /* پس‌زمینه تاریک */
         color: white;
-        /* Text color for dark theme */
+        /* رنگ متن برای تم تاریک */
     }
 
     body[data-bs-theme="light"] {
         background-color: rgb(231, 231, 231);
-        /* Light background */
+        /* پس‌زمینه روشن */
         color: black;
-        /* Text color for light theme */
+        /* رنگ متن برای تم روشن */
     }
 </style>
 
-<body>
+<body id="body">
     @yield('name')
     <br>
 </body>
