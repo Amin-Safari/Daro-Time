@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\SignInController;
@@ -10,12 +11,13 @@ Route::get('/', function () {
     return view('welcome');
  
 })->name('welcome');
+
 Route::get('/abuot', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('welcome');
-});
+
+Route::get('/dashboard', [MedicineController::class,'index'])->name('dashboard.index');
+
 Route::get('/signup', [SignUpController::class , 'index'])->name('signup.index');
 
 Route::post('/sinagup', [SignUpController::class , 'signup'])->name('signup');
@@ -37,3 +39,7 @@ Route::get('/user',[UserController::class, 'index'])->name('user.index');
 Route::patch('/user/update', [UserController::class, 'update'])->name('user.update');
 
 Route::get('/user/logout',[UserController::class, 'logout'])->name('user.logout');
+
+Route::post('/add-medicine', [MedicineController::class, 'store'])->name('add-medicine');
+
+Route::get('/active-drugs', [MedicineController::class, 'getActiveDrugs']);
