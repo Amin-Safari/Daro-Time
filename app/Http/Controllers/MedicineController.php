@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 class MedicineController extends Controller
 {
-    public function index() {     
+    public function index() {  
         // Get all active drugs for the authenticated user
         $drugs = Medicine::where('user_id', auth()->id())->get();
         
@@ -43,6 +43,7 @@ class MedicineController extends Controller
             'start_date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
         ]);
+        $dt=$request->start_date .' '. $request->start_time;
         Medicine::create([
             'name' => $request->medicine_name,
             'dosage' => $request->dosage,
@@ -52,6 +53,7 @@ class MedicineController extends Controller
             'start_date' => $request->start_date,
             'start_time' => $request->start_time,
             'user_id' => auth()->id(), // Add user ID
+            'last_reminder'=> $dt,
         ]);
         return response()->json(['success' => true]);
     }
@@ -59,5 +61,18 @@ class MedicineController extends Controller
     {
         $drugs = Medicine::where('user_id', auth()->id())->get();
         return response()->json($drugs);
+    }
+    public function update(Request $request, $id)
+    {
+        $drug = Medicine::find($id);
+        $drug->remaining_dose = $request->remaining_dose;
+        $drug->save();
+        return response()->json(['success' => true]);
+    }
+    public function destroy($id)
+    {
+        $drug = Medicine::find($id);
+        $drug->delete();
+        return response()->json(['success' => true]);
     }
 }
